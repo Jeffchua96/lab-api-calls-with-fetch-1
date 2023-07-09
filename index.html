@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trivia Questions</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js" ></script>
   </head>
   <body>
     <header>
       <h1>Trivia Questions</h1>
+      <a href="https://opentdb.com/api.php?amount=10"></a>
     </header>
     <section class="centered">
       <form>
@@ -17,7 +19,13 @@
       </form>
     </section>
     <main class="centered">
-      <!-- Your `.card` elements should show up here. -->
+      <article class="card">
+        <h2>General Knowledge </h2>
+        <p>QUESTION</p>
+        <button>Show Answer</button>
+        <p class="hidden">CORRECT ANSWER</p>
+      </article>
+      
     </main>
   </body>
 </html>
