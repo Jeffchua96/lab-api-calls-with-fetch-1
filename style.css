@@ -59,8 +59,10 @@ button:hover {
 }
 
 .card {
-  border: 3px solid #4f7d5d;
+  border: 10px solid #4f7d5d;
   padding: 25px;
+  height: 500px;
+  width:200px;
 }
 
 .hidden {

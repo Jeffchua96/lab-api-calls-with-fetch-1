@@ -1,5 +1,4 @@
-const { get } = require("lodash");
-const { json } = require("stream/consumers");
+HTML
 
 const BASE_URL = "https://opentdb.com/api.php?amount=10"
 
@@ -12,13 +11,16 @@ const BASE_URL = "https://opentdb.com/api.php?amount=10"
                 fetch(BASE_URL)
                 .then(response => response.json())  
                 .then(json => {
+                    console.log(json))
+
                     main.innerHTML= "";
-                    json.results.forEach((result) => {
+                    json.results.forEach((element) => {
                         addQuestionCard(element)
                     })
             })  
             
-            .catch(error => console.log(error));
+            .catch(error => {
+            console.log(error)
             alert("An error has occurred, U will die now")
             })  
             
@@ -31,7 +33,7 @@ const BASE_URL = "https://opentdb.com/api.php?amount=10"
                 let secondParagraph = document.createElement("p");
             
                 article.classList.add(".card");
-                secondParagraph.classList.add("hide");
+                secondParagraph.classList.add("hidden");
             
                 switch (question.type) {
                     case "easy":
@@ -47,16 +49,30 @@ const BASE_URL = "https://opentdb.com/api.php?amount=10"
                         break;
                 }
             
-                
-            let showAnswer= document.querySelector(".show-answer)"
-                showAnswer.addEventListener("click" , (event) =>{
-                    event.preventDefault();
-                fetch ("https://opentdb.com/api.php?amount=10" ) 
-                
-                .then(response) => response.json());
-                    response.result.forEach((result) =>{
-                        functionName(result)
-                    })
-            
-                .catch(functionName);
-                })
+                h2.innerText = question.category;
+                firstParagraph.innerText = question.question;
+                button.innerText = ("Show Answer")
+                secondParagraph.innerText = question.correct_answer
+
+                main.append(article);
+                article.append(h2);
+                article.append(firstParagraph);
+                article.append(button);
+                article.append(secondParagraph);    
+
+                button.addEventListener("click", () => {
+                    secondParagraph.classList.toggle("hidden"); 
+                })  
+            }
+            let showAnswer= document.querySelector(".Show-Answer)"
+    showAnswer.addEventListener("click" , (event) =>{
+        event.preventDefault();
+    fetch ("https://opentdb.com/api.php?amount=10" ) 
+    
+    .then(response) => response.json());
+        response.result.forEach((result) =>{
+            functionName(result)
+        })
+
+    .catch(functionName);
+    })
