@@ -1,38 +1,41 @@
 
 const form = document.querySelector("form");
 const main = document.querySelector("main")
-const BASE_URL = "https://opentdb.com/api.php?amount=10"
+const BASE_URL = "https://opentdb.com/api.php?amount=10&category=9&type=multiple"
+
 
 form.addEventListener("submit", (event) => {
+
     event.preventDefault();
     main.innerHTML = "";
    
     fetch(BASE_URL).then(response => response.json())   
     .then((json) => {
+        console.log(json)
         json.results.forEach((result) => {
-            addQuestionCard(result);
+            createCard(result);
         })
     })  
     .catch(displayError)
 })
 
-    function addQuestionCard(result) {  
+    function createCard(result) {  
         const header= document.createElement("h2");
         header.textContent = result.category;
         
-        const p = document.createElement("p");
-        p.textContent = result.question;
+        const pTag = document.createElement("p");
+        pTag.textContent = result.question;
 
         const button = document.createElement("button");    
         button.textContent = "Show Answer";
 
         const answer = document.createElement("p");
-        answer.textContent.add("hidden");
+        answer.classList.add("hidden");
         answer.textContent = result.correct_answer; 
 
         const article = document.createElement("article");
         article.className= "card"
-        article.append(header, p, button, answer);
+        article.append(header, pTag, button, answer);
         main.append(article);
 
         button.addEventListener("click", (e) => {
@@ -42,14 +45,14 @@ form.addEventListener("submit", (event) => {
 
 function displayError(error) {
     const header = document.createElement("h2");
-    header.textContent = "error";
+    header.textContent = "Error!";
 
-    const p = document.createElement("p");
-    p.textContent = error.message;
+    const pTag = document.createElement("p");
+    pTag.textContent = error.message;
 
     const article = document.createElement("article");  
     article.classList.add("card");
-    article.append(header, p);
+    article.append(header, pTag);
     main.append(article);
 }   
         
